@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>wdgAnalise</class>
+ <widget class="QDialog" name="wdgAnalise">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>494</width>
+    <height>398</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Análise de aerossol na atmosfera</string>
+  </property>
+  <widget class="QCalendarWidget" name="calendarData">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>70</y>
+     <width>466</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="selectedDate">
+    <date>
+     <year>2018</year>
+     <month>12</month>
+     <day>29</day>
+    </date>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtInputDir">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>10</y>
+     <width>356</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Input/</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblInputDir">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>106</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Diretório de arquivos:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="indent">
+    <number>0</number>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pBtnCarregar">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>370</y>
+     <width>476</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Carregar dados selecionados e exibir</string>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="dateEdtFrom">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>40</y>
+     <width>136</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="dateEdtTo">
+   <property name="geometry">
+    <rect>
+     <x>315</x>
+     <y>40</y>
+     <width>110</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblFrom">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>40</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>De:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTo">
+   <property name="geometry">
+    <rect>
+     <x>285</x>
+     <y>40</y>
+     <width>26</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Até:</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>5</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>5</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>
