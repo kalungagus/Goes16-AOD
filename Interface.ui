@@ -87,6 +87,16 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="dateTime">
+    <datetime>
+     <hour>0</hour>
+     <minute>0</minute>
+     <second>0</second>
+     <year>2019</year>
+     <month>3</month>
+     <day>1</day>
+    </datetime>
+   </property>
   </widget>
   <widget class="QDateEdit" name="dateEdtTo">
    <property name="geometry">
@@ -96,6 +106,16 @@
      <width>110</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="dateTime">
+    <datetime>
+     <hour>0</hour>
+     <minute>0</minute>
+     <second>0</second>
+     <year>2019</year>
+     <month>4</month>
+     <day>1</day>
+    </datetime>
    </property>
   </widget>
   <widget class="QLabel" name="lblFrom">
