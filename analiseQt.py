@@ -79,12 +79,17 @@ class MyApp(UIClass, QtBaseClass):
                     nc.close()
                     # Call the reprojection funcion
                     grid = remap(path, variable, extent, resolution, x1, y1, x2, y2)
+                    quality = remap(path, 'DQF', extent, resolution, x1, y1, x2, y2)
                     # Read the data returned by the function 
                     data = grid.ReadAsArray()
+                    data2 = quality.ReadAsArray()
                     # Convert from int16 to uint16
                     data = data.astype(np.float64)
                     data[data == max(data[0])] = np.nan
                     data[data == min(data[0])] = np.nan
+                    data2 = data2.astype(np.float64)
+                    data2[data2 == max(data2[0])] = np.nan
+                    data2[data2 == min(data2[0])] = np.nan
                     # Define o tamanho da figura salva=====================================================================
                     DPI = 150
                     plt.figure(figsize=(2000/float(DPI), 2000/float(DPI)), frameon=True, dpi=DPI)
@@ -102,7 +107,7 @@ class MyApp(UIClass, QtBaseClass):
                     # Aqui, vamos utilizar um arquivo de esquemas de cores.
                     # Tais arquivos podem ser encontrados no link: http://soliton.vm.bytemark.co.uk/pub/cpt-city/
                     # Este arquivo é baixado do site de exemplos, e é o arquivo específico para temperaturas.
-                    cpt = loadCPT('Colortables\\IR4AVHRR6.cpt')
+                    cpt = loadCPT('Colortables\\temperature.cpt')
                     # Faz a interpolação linear com o arquivo CPT
                     cpt_convert = LinearSegmentedColormap('cpt', cpt)
                     # Plota o canal do GOES-16 com as cores convertidas do CPT
@@ -110,18 +115,18 @@ class MyApp(UIClass, QtBaseClass):
                     # Configuração para o esquema de cores SVGAIR_TEMP
                     #bmap.imshow(data, origin='upper', cmap=cpt_convert, vmin=-112.15, vmax=56.85)
                     # Configuração para o esquema de cores Square Root Visible Enhancement
-                    bmap.imshow(data, origin='upper', cmap=cpt_convert, vmin=0, vmax=1)
+                    bmap.imshow(data, origin='upper', cmap=cpt_convert, vmin=0, vmax=5)
                     # Insere a barra de cores embaixo
                     # cb = bmap.colorbar(location='bottom', size = '2%', pad = '-4%')
                     # Passo para o exercício 3
-                    cb = bmap.colorbar(location='bottom', size = '2%', pad = '-4%', ticks=[0.2, 0.4, 0.6, 0.8])
+                    cb = bmap.colorbar(location='bottom', size = '2%', pad = '-4%', ticks=[0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 4.2, 4.4, 4.6, 4.8, 5.0])
                     
                     cb.outline.set_visible(False) # Remove the colorbar outline
                     cb.ax.tick_params(width = 0) # Remove the colorbar ticks
                     cb.ax.xaxis.set_tick_params(pad=-12.5) # Put the colobar labels inside the colorbar
                     cb.ax.tick_params(axis='x', colors='yellow', labelsize=8) # Change the color and size of the colorbar labels
                     # Passo para o exercício 3
-                    cb.ax.set_xticklabels(['0.2', '0.4', '0.6', '0.8'])
+                    cb.ax.set_xticklabels(['0.2', '0.4', '0.6', '0.8', '1.0', '1.2', '1.4', '1.6', '1.8', '2.0', '2.2', '2.4', '2.6', '2.8', '3.0', '3.2', '3.4', '3.6', '3.8', '4.0', '4.2', '4.4', '4.6', '4.8', '5.0'])
                     
                     #Unit = "Brightness Temperature [°C]"
                     #Unit = "Reflectance"
@@ -166,9 +171,10 @@ class MyApp(UIClass, QtBaseClass):
                     data_type = gdal.GDT_Float32 # gdal.GDT_Int16 # gdal.GDT_Float32
                     # Create grid
                     #options = ['COMPRESS=JPEG', 'JPEG_QUALITY=80', 'TILED=YES']
-                    grid = driver.Create('grid', ncols, nlines, 1, data_type)#, options)
+                    grid = driver.Create('grid', ncols, nlines, 2, data_type)#, options)
                     # Write data for each bands
                     grid.GetRasterBand(1).WriteArray(data)
+                    grid.GetRasterBand(2).WriteArray(data2)
                     # Lat/Lon WSG84 Spatial Reference System
                     srs = osr.SpatialReference()
                     srs.ImportFromProj4('+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs')
