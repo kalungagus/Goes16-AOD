@@ -159,9 +159,9 @@ class MyApp(UIClass, QtBaseClass):
                     if not os.path.exists('Output\\' + date.strftime("%Y\\%m\\%d\\")):
                         os.makedirs('Output\\' + date.strftime("%Y\\%m\\%d\\"))
                         print('Directory Output\\' + date.strftime("%Y\\%m\\%d\\ created!"))
-                    plt.savefig('Output\\' + date.strftime("%Y\\%m\\%d\\") + 'G16_' + nomenclature + '_' + date.strftime("%d-%m-%Y") + '.png', dpi=DPI, bbox_inches='tight', pad_inches=0)
+                    plt.savefig('Output\\' + date.strftime("%Y\\%m\\%d\\") + 'G16_' + nomenclature + '_' + date.strftime("%M-%H-%d-%m-%Y") + '.png', dpi=DPI, bbox_inches='tight', pad_inches=0)
                     plt.close()
-                    print('Generated .png: ', 'G16_' + nomenclature + '_' + date.strftime("%d-%m-%Y") + '.png')
+                    print('Generated .png: ', 'G16_' + nomenclature + '_' + date.strftime("%M-%H-%d-%m-%Y") + '.png')
                     # Export the result to GeoTIFF ================================================
                     # Get GDAL driver GeoTiff
                     driver = gdal.GetDriverByName('GTiff')
@@ -184,8 +184,8 @@ class MyApp(UIClass, QtBaseClass):
                     # Save the file
                     #print('G16_' + product + '_' + variable + '_' + date + '.tif')
                     #driver.CreateCopy('G16_' + product + '_' + variable + '_' + date + '.tif', grid, 0)
-                    print('Generated GeoTIFF: ', 'Output\\' + date.strftime("%Y\\%m\\%d\\") + 'G16_' + nomenclature + '_' + date.strftime("%Y-%m-%d") + '.tif')
-                    driver.CreateCopy('Output\\' + date.strftime("%Y\\%m\\%d\\") + 'G16_' + nomenclature + '_' + date.strftime("%Y-%m-%d") + '.tif', grid, 0)	
+                    print('Generated GeoTIFF: ', 'Output\\' + date.strftime("%Y\\%m\\%d\\") + 'G16_' + nomenclature + '_' + date.strftime("%Y-%m-%d-%H-%M") + '.tif')
+                    driver.CreateCopy('Output\\' + date.strftime("%Y\\%m\\%d\\") + 'G16_' + nomenclature + '_' + date.strftime("%Y-%m-%d-%H-%M") + '.tif', grid, 0)	
                     # Close the file
                     driver = None
                     grid = None

@@ -128,4 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Satellite product files
+Input/*.nc
 # End of https://www.gitignore.io/api/python
