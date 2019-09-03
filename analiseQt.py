@@ -19,6 +19,7 @@ from matplotlib.colors import LinearSegmentedColormap # Linear interpolation for
 # Required libraries ==========================================================
 from Scripts.remap_g16 import remap                               # Import the Remap function  
 from datetime import datetime, timedelta              # Library to convert julian day to dd-mm-yyyy
+from pytz import timezone
 from netCDF4 import Dataset                           # Import the NetCDF Python interface
 from osgeo import gdal, osr                           # Import GDAL
 import numpy as np                                    # Import the Remap function 
@@ -55,6 +56,7 @@ class MyApp(UIClass, QtBaseClass):
             # Getting the file date
             add_seconds = int(nc.variables['time_bounds'][0])
             date = datetime(2000,1,1,12) + timedelta(seconds=add_seconds)
+            date = date.astimezone(timezone('America/Sao_Paulo'))
             print(date)
             if(date > fromDate and date < toDate) :
                 # Get the latitude and longitude image bounds
