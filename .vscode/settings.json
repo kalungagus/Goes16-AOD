@@ -1,0 +1,3 @@
+{
+    “terminal.integrated.shellArgs.windows”: [“/K”, “C:\\Users\\Gustavo\\Anaconda3\\Scripts\\activate.bat C:\\<path-to-conda-installation>”]
+}
