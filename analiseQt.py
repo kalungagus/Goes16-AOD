@@ -82,6 +82,15 @@ class MyApp(UIClass, QtBaseClass):
                 else:
                     nc.close()
                     continue
+                # Obtém a faixa de valores válida para cada variável
+                if(nc.variables[variable].valid_range[0] < 0):
+                    minval = nc.variables[variable].valid_range[0] + 256
+                else:
+                    minval = nc.variables[variable].valid_range[0]
+                if nc.variables[variable].valid_range[1] < 0:
+                    maxval = nc.variables[variable].valid_range[1] + 256
+                else:
+                    maxval = nc.variables[variable].valid_range[1]
                 # Close the NetCDF file after getting the data
                 nc.close()
                 # Call the reprojection funcion
@@ -121,20 +130,17 @@ class MyApp(UIClass, QtBaseClass):
                 cpt_convert = LinearSegmentedColormap('cpt', cpt)
                 # Plota o canal do GOES-16 com as cores convertidas do CPT
                 # Configuração para o esquema de cores Square Root Visible Enhancement
-                maxval = round(np.nanmax(data), 2)
-                minval = round(np.nanmin(data), 2)
                 bmap.imshow(data, origin='upper', cmap=cpt_convert, vmin=minval, vmax=maxval)
                 # Insere a barra de cores embaixo
-                if not np.isnan(maxval) and not np.isnan(minval):
-                    step = round((maxval-minval)/10, 2)
-                    bar_steps = np.arange(minval, maxval, step)
-                    cb = bmap.colorbar(location='bottom', size = '2%', pad = '-4%', ticks=bar_steps)
-                    cb.outline.set_visible(False) # Remove the colorbar outline
-                    cb.ax.tick_params(width = 0) # Remove the colorbar ticks
-                    cb.ax.xaxis.set_tick_params(pad=-12.5) # Put the colobar labels inside the colorbar
-                    cb.ax.tick_params(axis='x', colors='yellow', labelsize=8) # Change the color and size of the colorbar labels
-                    # Passo para o exercício 3
-                    cb.ax.set_xticklabels(bar_steps)
+                step = (maxval-minval)/20
+                bar_steps = np.around(np.arange(minval, maxval, step), decimals=2)
+                cb = bmap.colorbar(location='bottom', size = '2%', pad = '-4%', ticks=bar_steps)
+                cb.outline.set_visible(False) # Remove the colorbar outline
+                cb.ax.tick_params(width = 0) # Remove the colorbar ticks
+                cb.ax.xaxis.set_tick_params(pad=-12.5) # Put the colobar labels inside the colorbar
+                cb.ax.tick_params(axis='x', colors='yellow', labelsize=8) # Change the color and size of the colorbar labels
+                # Passo para o exercício 3
+                cb.ax.set_xticklabels(bar_steps)
                 # Add a black rectangle in the bottom to insert the image description
                 lon_difference = (extent[2] - extent[0]) # Max Lon - Min Lon
                 currentAxis = plt.gca()
