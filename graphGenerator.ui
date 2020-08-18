@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>wdgAnalise</class>
+ <widget class="QDialog" name="wdgAnalise">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>561</width>
+    <height>392</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Análise de aerossol na atmosfera</string>
+  </property>
+  <widget class="QCalendarWidget" name="calendarInitialData">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>65</y>
+     <width>266</width>
+     <height>176</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="selectedDate">
+    <date>
+     <year>2018</year>
+     <month>12</month>
+     <day>29</day>
+    </date>
+   </property>
+   <property name="verticalHeaderFormat">
+    <enum>QCalendarWidget::NoVerticalHeader</enum>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtWorkFolder">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>10</y>
+     <width>441</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>C:\Users\Gustavo\Projetos\IC\Software\Goes16-AOD\WorkFolder</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWorkFolder">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>10</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pasta de trabalho:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="indent">
+    <number>0</number>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pBtnCarregar">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>365</y>
+     <width>541</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Processar dados para as datas selecionadas</string>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="dateEdtFrom">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>40</y>
+     <width>241</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="dateTime">
+    <datetime>
+     <hour>0</hour>
+     <minute>0</minute>
+     <second>0</second>
+     <year>2019</year>
+     <month>3</month>
+     <day>1</day>
+    </datetime>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="dateEdtTo">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>40</y>
+     <width>241</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="dateTime">
+    <datetime>
+     <hour>0</hour>
+     <minute>0</minute>
+     <second>0</second>
+     <year>2019</year>
+     <month>4</month>
+     <day>1</day>
+    </datetime>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblFrom">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>De:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTo">
+   <property name="geometry">
+    <rect>
+     <x>285</x>
+     <y>40</y>
+     <width>26</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Até:</string>
+   </property>
+  </widget>
+  <widget class="QCalendarWidget" name="calendarFinalData">
+   <property name="geometry">
+    <rect>
+     <x>285</x>
+     <y>65</y>
+     <width>266</width>
+     <height>176</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="selectedDate">
+    <date>
+     <year>2018</year>
+     <month>12</month>
+     <day>29</day>
+    </date>
+   </property>
+   <property name="verticalHeaderFormat">
+    <enum>QCalendarWidget::NoVerticalHeader</enum>
+   </property>
+   <property name="dateEditEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="ckbxEraseData">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>250</y>
+     <width>191</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Apagar dados após processamento</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="gpbxLocal">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>275</y>
+     <width>531</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Dados da localidade</string>
+   </property>
+   <widget class="QLineEdit" name="txtLatitude">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>20</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>-49.255019</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblLatitude">
+    <property name="geometry">
+     <rect>
+      <x>15</x>
+      <y>20</y>
+      <width>56</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Latitude: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblLongitude">
+    <property name="geometry">
+     <rect>
+      <x>15</x>
+      <y>45</y>
+      <width>56</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Latitude: </string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtLongitude">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>45</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>-16.665791</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QProgressBar" name="pgBarProcess">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>350</y>
+     <width>531</width>
+     <height>11</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>5</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>5</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

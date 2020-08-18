@@ -25,7 +25,9 @@ sdist/
 var/
 wheels/
 GOES-16 Samples/
+WorkFolder/
 Output/
+Zip files/
 pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
