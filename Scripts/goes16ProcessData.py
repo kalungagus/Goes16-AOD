@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 from pytz import timezone
 import os
 import pandas as pd
+import numpy as np
 
 class goes16ProcessData(QThread):
     # Criando os sinais para aplicações que utilizem esta classe
@@ -41,6 +42,7 @@ class goes16ProcessData(QThread):
         time_count = 0
         lista = pd.DataFrame(info_list, columns=info_list[0])
         for tempo in lista_tempos:
+            print("Obtendo dados de " + tempo.strftime("%Y-%m-%d %H:%M:%S"))
             data_file_name = "dados-" + tempo.strftime("%Y.%m.%d.%H") + ".csv"
             if os.path.exists(self.path + "\\Relatórios\\" + data_file_name):
                 temp = pd.read_csv(self.path + "\\Relatórios\\" + data_file_name, sep=';', engine='python', index_col=0)
@@ -49,8 +51,23 @@ class goes16ProcessData(QThread):
                 self.update.emit(int((time_count*100)/total_count))
             else:
                 aodf_Files = fileManagerAODF.get_data(tempo)
+                if len(aodf_Files) == 0:
+                    print("Não há dados de AODF")
+                    time_count = time_count + 6
+                    self.update.emit(int((time_count*100)/total_count))
+                    continue
                 cpsf_Files = fileManagerCPSF.get_data(tempo)
+                if len(cpsf_Files) == 0:
+                    print("Não há dados de CPSF")
+                    time_count = time_count + 6
+                    self.update.emit(int((time_count*100)/total_count))
+                    continue
                 adpf_Files = fileManagerADPF.get_data(tempo)
+                if len(adpf_Files) == 0:
+                    print("Não há dados de ADPF")
+                    time_count = time_count + 6
+                    self.update.emit(int((time_count*100)/total_count))
+                    continue
                 aodf_count = cpsf_count = adpf_count = 0
                 hour_list = []
                 for minuto in range(0, 60, 10):
@@ -61,21 +78,21 @@ class goes16ProcessData(QThread):
                         row = row + result
                         aodf_count = aodf_count + 1
                     else:
-                        row = row + [0, 3]
+                        row = row + [np.nan, 3]
                     if self.get_data_start_minute(cpsf_Files[cpsf_count]) == minuto:
                         product_data = goes16Data(cpsf_Files[cpsf_count], extent, tzinfo=timezone('America/Sao_Paulo'))
                         result = product_data.get_data(self.latitude, self.longitude)
                         row = row + result
                         cpsf_count = cpsf_count + 1
                     else:
-                        row = row + [0, 14]
+                        row = row + [np.nan, 14]
                     if self.get_data_start_minute(adpf_Files[adpf_count]) == minuto:
                         product_data = goes16Data(adpf_Files[adpf_count], extent, tzinfo=timezone('America/Sao_Paulo'))
                         result = product_data.get_data(self.latitude, self.longitude)
                         row = row + result
                         adpf_count = adpf_count + 1
                     else:
-                        row = row + [0, 129]
+                        row = row + [np.nan, 129]
                     time_count = time_count + 1
                     hour_list.append(row)
                     self.update.emit(int((time_count*100)/total_count))

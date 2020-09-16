@@ -41,6 +41,7 @@ class goes16Data:
         # Obtém do arquivo qual o produto
         filename = path.split('\\')[-1]
         self.product = (filename[filename.find("L2-")+3:filename.find("-M")])
+        print(self.product)
         if self.product == "AODF":
             self.variable = 'AOD'
             self.qvariable = 'DQF'
@@ -74,7 +75,7 @@ class goes16Data:
         self.minval = np.ushort(nc.variables[self.variable].valid_range[0]) * self.scale + self.offset
         self.maxval = np.ushort(nc.variables[self.variable].valid_range[1]) * self.scale + self.offset
 
-        self.fillvalue = nc.variables[self.variable]._FillValue
+        self.fillvalue = np.uint16(nc.variables[self.variable]._FillValue)
         self.qualityFillvalue = np.uint8(nc.variables[self.qvariable]._FillValue)
 
         # Fecha o Dataset para que o gdal não dê erro ao processar os dados do arquivo
@@ -85,8 +86,8 @@ class goes16Data:
         product_grid = remap(self.path, self.variable, self.extent, self.resolution, self.x1, self.y1, self.x2, self.y2)
         product_data = product_grid.ReadAsArray()
         product_data[product_data == self.fillvalue] = np.nan
-        product_data = product_data.astype(np.float64)
         product_data = product_data * self.scale + self.offset
+        product_data = product_data.astype(np.float64)
         # Processa os dados de bit de qualidade
         quality_grid = remap(self.path, self.qvariable, self.extent, self.resolution, self.x1, self.y1, self.x2, self.y2)
         quality_data = quality_grid.ReadAsArray()

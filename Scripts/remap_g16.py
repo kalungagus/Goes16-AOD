@@ -104,7 +104,7 @@ def remap(path, variable, extent, resolution, x1, y1, x2, y2):
     array = array.astype(np.uint16)  
        
     # Apply scale and offset
-    array = array * scale + offset
+    #array = array * scale + offset
 
     # Get the raster 
     grid.GetRasterBand(1).WriteArray(array)
