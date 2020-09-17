@@ -72,25 +72,34 @@ class goes16ProcessData(QThread):
                 hour_list = []
                 for minuto in range(0, 60, 10):
                     row = [(tempo + timedelta(minutes=minuto)).strftime("%Y-%m-%d %H:%M:%S")]
-                    if self.get_data_start_minute(aodf_Files[aodf_count]) == minuto:
-                        product_data = goes16Data(aodf_Files[aodf_count], extent, tzinfo=timezone('America/Sao_Paulo'))
-                        result = product_data.get_data(self.latitude, self.longitude)
-                        row = row + result
-                        aodf_count = aodf_count + 1
+                    if aodf_count < len(aodf_Files):
+                        if self.get_data_start_minute(aodf_Files[aodf_count]) == minuto:
+                            product_data = goes16Data(aodf_Files[aodf_count], extent, tzinfo=timezone('America/Sao_Paulo'))
+                            result = product_data.get_data(self.latitude, self.longitude)
+                            row = row + result
+                            aodf_count = aodf_count + 1
+                        else:
+                            row = row + [np.nan, 3]
                     else:
                         row = row + [np.nan, 3]
-                    if self.get_data_start_minute(cpsf_Files[cpsf_count]) == minuto:
-                        product_data = goes16Data(cpsf_Files[cpsf_count], extent, tzinfo=timezone('America/Sao_Paulo'))
-                        result = product_data.get_data(self.latitude, self.longitude)
-                        row = row + result
-                        cpsf_count = cpsf_count + 1
+                    if cpsf_count < len(cpsf_Files):
+                        if self.get_data_start_minute(cpsf_Files[cpsf_count]) == minuto:
+                            product_data = goes16Data(cpsf_Files[cpsf_count], extent, tzinfo=timezone('America/Sao_Paulo'))
+                            result = product_data.get_data(self.latitude, self.longitude)
+                            row = row + result
+                            cpsf_count = cpsf_count + 1
+                        else:
+                            row = row + [np.nan, 14]
                     else:
                         row = row + [np.nan, 14]
-                    if self.get_data_start_minute(adpf_Files[adpf_count]) == minuto:
-                        product_data = goes16Data(adpf_Files[adpf_count], extent, tzinfo=timezone('America/Sao_Paulo'))
-                        result = product_data.get_data(self.latitude, self.longitude)
-                        row = row + result
-                        adpf_count = adpf_count + 1
+                    if adpf_count < len(adpf_Files):
+                        if self.get_data_start_minute(adpf_Files[adpf_count]) == minuto:
+                            product_data = goes16Data(adpf_Files[adpf_count], extent, tzinfo=timezone('America/Sao_Paulo'))
+                            result = product_data.get_data(self.latitude, self.longitude)
+                            row = row + result
+                            adpf_count = adpf_count + 1
+                        else:
+                            row = row + [np.nan, 129]
                     else:
                         row = row + [np.nan, 129]
                     time_count = time_count + 1
